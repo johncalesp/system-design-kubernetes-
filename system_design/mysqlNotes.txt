@@ -1,0 +1,43 @@
+1. Dropping the user.
+
+From Mysql Console:
+
+List Users (helpful to see all your users):
+
+select user, host from mysql.user;
+
+Drop Desired User:
+
+drop user '{{ username }}'@'%';
+
+2. Create the user again.
+
+Create User and Grant Permissions:
+
+CREATE USER '{{ username }}'@'%' IDENTIFIED BY '{{ password }}';
+GRANT ALL PRIVILEGES ON *.* TO '{{ username }}'@'%' WITH GRANT OPTION;
+
+Run this command:
+
+FLUSH PRIVILEGES;
+
+3. Make sure you have the correct binding on your MySQL config file.
+
+Locate your MySQL config file (additional notes at the end). If you want to have MySQL listen for connections on more than one network find the following line on the config file:
+
+bind-address=127.0.0.1
+
+and comment it using a '#':
+
+#bind-address=127.0.0.1
+
+
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+
+sudo systemctl restart mysql
+
+curl -X POST http://mp3converter.com/login -u [user]:[password]
+
+curl -X POST -F 'file=@./test.mp4' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impob25zaXRvX2NlMTZAaG90bWFpbC5jb20iLCJleHAiOjE2Njg4ODIzNzIsImlhdCI6MTY2ODc5NTk3MiwiYWRtaW4iOnRydWV9.Ze8Kq7sPIyqFv4UQR6Edyxzo5caRYVbx4i1yJbzSIlE' http://mp3converter.com/upload
+
+curl --output mp3_download.mp3 -X GET -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impob25zaXRvX2NlMTZAaG90bWFpbC5jb20iLCJleHAiOjE2Njg4ODIzNzIsImlhdCI6MTY2ODc5NTk3MiwiYWRtaW4iOnRydWV9.Ze8Kq7sPIyqFv4UQR6Edyxzo5caRYVbx4i1yJbzSIlE' http://mp3converter.com/download?fid=6377ce898a240491f839e476

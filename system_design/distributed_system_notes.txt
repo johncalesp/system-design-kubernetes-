@@ -1,0 +1,29 @@
+minikube start
+minikube addons enable ingress
+minikube tunnel ?
+minikube stop
+k9s
+
+sudo mysql
+
+/home/ubuntu/system_design/python/src/auth
+source ./venv/bin/activate
+pip -V
+env | grep ENV
+
+docker images
+docker tag 0302431d66e6 johncalesp/gateway:latest
+docker push johncalesp/gateway:latest
+docker image rm []
+
+kubectl apply -f ./
+kubectl delete -f ./
+kubectl scale deployment --replicas=0 [gateway]
+kubectl logs -f [pod]
+
+https://stackoverflow.com/questions/70961901/ingress-with-minikube-working-differently-on-mac-vs-ubuntu-when-to-set-etc-host
+rabbitmq-manager.com
+
+https://github.com/kubernetes/minikube/issues/8439
+
+mysql -h host -u user -p
